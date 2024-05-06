@@ -1,0 +1,13 @@
+# Gradle artifacts
+.gradle/
+
+# IntelliJ files
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# Maven artifacts
+out/
+build/
+/classes/artifacts/osp_api

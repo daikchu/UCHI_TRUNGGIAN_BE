@@ -1,0 +1,27 @@
+package com.vn.osp.notarialservices.citizenVerification.dto;
+
+import lombok.Data;
+
+@Data
+public class CitizenVerificationsDTO {
+    private String verify_id;
+    private String transaction_id;
+    private String notary_office_id;
+    private String province_code;
+    private java.sql.Timestamp verify_date;
+    private String verify_by;
+    private String verify_status;
+    private String citizen_verify_cccd;
+    private String citizen_verify_fullname;
+    private String citizen_info;
+
+    private String notary_office_name;
+    private String province_name;
+    private String verify_status_name;
+    private String verify_by_name;
+    private String verify_date_formatted;
+
+    private String order_id;
+    private Integer using_verify_status;
+
+}
