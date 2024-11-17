@@ -228,8 +228,9 @@ public class PaymentTransactionRepositoryImpl implements PaymentTransactionRepos
         } catch (Exception e) {
             LOG.error("Have an error in method checkExitsRefTransactionId: " + e.getMessage());
             entityManagerCurrent.getTransaction().rollback();
-            entityManagerCurrent.close();
             return exitsTransactionId;
+        } finally {
+            entityManagerCurrent.close();
         }
         return exitsTransactionId;
     }
@@ -252,14 +253,16 @@ public class PaymentTransactionRepositoryImpl implements PaymentTransactionRepos
             entityManagerCurrent.getTransaction().rollback();
             entityManagerCurrent.close();
             return Optional.of(new PaymentTransactions());
+        } finally {
+            entityManagerCurrent.close();
         }
         return Optional.of(result);
     }
     @Override
     public Optional<List<PaymentTransactions>> updateStatusOrderIdAfter15Minutes(){
         List<PaymentTransactions> result = new ArrayList<>();
-        EntityManager entityManagerCurrent = entityManagerFactory.createEntityManager();
-        entityManagerCurrent.getTransaction().begin();
+        /*EntityManager entityManagerCurrent = entityManagerFactory.createEntityManager();
+        entityManagerCurrent.getTransaction().begin();*/
         try{
             StringBuilder hql = new StringBuilder();
             hql.append("SELECT pt.* FROM");
@@ -289,8 +292,12 @@ public class PaymentTransactionRepositoryImpl implements PaymentTransactionRepos
             }
         }catch (Exception e) {
             LOG.error("Have an error in method updateStatusOrderIdAfter15Minutes: " + e.getMessage());
-            entityManagerCurrent.close();
             return Optional.of(new ArrayList<>());
+        }
+        finally {
+            entityManager.close();
+            entityManager.flush();
+            entityManager.clear();
         }
         return Optional.of(result);
     }

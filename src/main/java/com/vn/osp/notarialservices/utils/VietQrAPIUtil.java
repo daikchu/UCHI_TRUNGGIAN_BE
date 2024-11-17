@@ -66,6 +66,7 @@ public class VietQrAPIUtil {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             LOGGER.error("Have an error in method VietQrAPIUtil.callAPIGenerateVietQRCode:"+e.getMessage());
         }finally {
             conn.disconnect();

@@ -135,8 +135,9 @@ public class CitizenVerficationNumberRepositoryImpl implements CitizenVerficatio
         } catch (Exception e) {
             LOG.error("Have an error in method CitizenVerficationNumberRepositoryImpl.getDetail: " + e.getMessage());
             entityManagerCurrent.getTransaction().rollback();
-            entityManagerCurrent.close();
             return Optional.empty();
+        } finally {
+            entityManagerCurrent.close();
         }
         return Optional.of(citizenVerifyNumberDTO);
     }
